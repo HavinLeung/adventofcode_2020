@@ -1,3 +1,4 @@
+inpt = [
 ("mz","mz","mzch"),
 ("fzmwqgcjylr","goqewcrzfjm","caqgpmrwz"),
 ("hupvfabkzntecq","diuvsxqtpbfjckmz"),
@@ -267,7 +268,7 @@
 ("inegmbt","mitgben","eimgtnb"),
 ("rzc","jmx"),
 ("mgjcabfol","hiavxjypk"),
-("hdewoxam",
+("hdewoxam",),
 ("lfkjgtrdqeyv","oimtuah","xztb"),
 ("hcr","qed"),
 ("mhesdwpfgabjqut","eupahqbgdsmftjzw","bjeqagdtphwfsmu","oagpdekhwbtjfimrsu","ygcxfdhewbumstjap"),
@@ -486,4 +487,35 @@
 ("hmygqnbwisvakefc","cesgpbfkavmqrny","uaodqcjnsvgyemfkxb","yvchkebnagqmfs","fsqemgytklcbavn"),
 ("asiuw","wiu","iuw"),
 ("fbuwvehgm","fwvmgbcuhe","hzxmubewf"),
-("zwkfytmcaijbelr","xur","rhgu","hr","pru"),
+("zwkfytmcaijbelr","xur","rhgu","hr","pru")
+]
+example = [
+    ("abc",),
+    ("a","b","c"),
+    ("ab","ac"),
+    ("a","a","a","a"),
+    ("b",)
+]
+
+
+def part1(groups):
+    return sum(map(lambda x: len(set(''.join(x))), groups))
+
+
+def part2(groups):
+    from collections import Counter
+    n = 0
+    for g in groups:
+        c = Counter(''.join(g))
+        for v in c.values():
+            if v == len(g):
+                n+=1
+    return n
+    pass
+
+
+print(part1(example))
+print(part1(inpt))
+
+print(part2(example))
+print(part2(inpt))
