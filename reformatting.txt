@@ -1,7 +1,0 @@
-light red bags contain 1 bright white bag, 2 muted yellow bags.
--> "light red" "1 bright white bag, 2 muted yellow bags."
--> "light red" "1 bright white bag" "2 muted yellow bags."
--> "light red" ("bright white", 1) ("muted yellow", 2)
-
-bright white bags contain 1 shiny gold bag.
-dotted black bags contain no other bags.

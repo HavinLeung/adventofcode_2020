@@ -360,6 +360,7 @@ def part2(passports):
         n += 1
     return n
 
+
 print(part1(example))
 print(part1(inpt))
 print(part2(inpt))

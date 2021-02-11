@@ -609,6 +609,8 @@ inpt = [
 import re
 from my_funcs import *
 from functools import lru_cache
+
+
 def transform_rule(rule):
     """
     color -> List[<color, number>]
@@ -621,9 +623,11 @@ def transform_rule(rule):
     right = lmap(lambda x: r.match(x).groups()[::-1], right)
     return left, right
 
-example_rules = {k:v for k,v in lmap(transform_rule, example)}
-inpt_rules = {k:v for k,v in lmap(transform_rule, inpt)}
+
+example_rules = {k: v for k, v in lmap(transform_rule, example)}
+inpt_rules = {k: v for k, v in lmap(transform_rule, inpt)}
 selector = [example_rules, inpt_rules]
+
 
 @lru_cache()
 def can_hold_gold(color, rule=1):
@@ -638,6 +642,7 @@ def can_hold_gold(color, rule=1):
             return True
     return False
 
+
 @lru_cache()
 def num_bags(color, rule=1):
     rules = selector[rule]
@@ -646,16 +651,19 @@ def num_bags(color, rule=1):
     other_bags = rules[color]
     return sum(map(lambda x: int(x[1]) * num_bags(x[0], rule), other_bags)) + 1
 
+
 def part1(rule=1):
     rules = selector[rule]
     n = 0
     for k in rules.keys():
         if can_hold_gold(k, rule):
-            n+=1
+            n += 1
     return n
+
 
 def part2(rule=1):
     return num_bags("shiny gold", rule) - 1
+
 
 print(part1(0))
 print(part1(1))
