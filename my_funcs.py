@@ -1,4 +1,5 @@
 # shadows generators for eager functions
+from functools import reduce
 
 def lmap(f, x):
     return list(map(f, x))
