@@ -40,7 +40,7 @@ def part1(data):
     return reduce(lambda a, b: a * b, min(zip(buses, wait_time), key=lambda x: x[1]))
 
 
-def part2(data):
+def part2_v1(data):
     data = data[1].split(',')
     data = zip(data, range(len(data)))
     data = filter(lambda x: x[0].isnumeric(), data)
@@ -63,7 +63,7 @@ def part2(data):
         maxkey_t += maxkey
 
 
-def part2_big(data):
+def part2_v2(data):
     def get_inverse(mod, n):
         # only works when mod is prime
         if n / mod == 0:
@@ -90,12 +90,33 @@ def part2_big(data):
         summation = summation % N
     return summation
 
+def part2_v3(data):
+    data = data[1].split(',')
+    data = zip(data, range(len(data)))
+    data = filter(lambda x: x[0].isnumeric(), data)
+    data = map(lambda x: (int(x[0]), x[1]), data)
+    data = {k: v for k, v in data}
+    t = 0
+    diff = 1
+    for mod, offset in data.items():
+        while True:
+            if (t + offset) % mod == 0:
+                # every solution must be of the form current_t + k * mod
+                # this holds true for all the mods since they're prime
+                diff *= mod
+                break
+            t += diff
+    return t
+
+
 
 print(part1(ex))
 print(part1(data))
 for ex in exs:
     print('should be equal')
-    print(part2(ex))
-    print(part2_big(ex))
-# part2 doesn't work on data because it's too slow
-print(part2_big(data))
+    print(part2_v1(ex))
+    print(part2_v2(ex))
+    print(part2_v3(ex))
+# part2_v1 doesn't work on data because it's too slow
+print(part2_v2(data))
+print(part2_v3(data))
