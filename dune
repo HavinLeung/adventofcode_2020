@@ -1,0 +1,5 @@
+(library
+  (name foo)
+  (libraries core re)
+  (preprocess (pps ppx_jane))
+)
