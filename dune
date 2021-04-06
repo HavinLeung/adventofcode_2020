@@ -1,5 +1,14 @@
 (library
   (name foo)
   (libraries core re)
+  (inline_tests
+    (deps
+      (glob_files in*.txt)
+    )
+  )
   (preprocess (pps ppx_jane))
 )
+(menhir
+  (modules day18parser day18parser2)
+)
+(ocamllex day18lexer day18lexer2)

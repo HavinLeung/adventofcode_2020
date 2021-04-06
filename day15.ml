@@ -1,4 +1,3 @@
-#! /usr/bin/env utop -require core,re,ppx_jane
 open! Core
 open! Re
 
@@ -22,13 +21,24 @@ let solve (data : int list) (turns: int) : int=
   | None -> recurse (List.last_exn data) (List.length data + 1)
 ;;
 
-print_s [%message (solve [0;3;6] 2020 : int)];;
-print_s [%message (solve [1;3;2] 2020 : int)];;
-print_s [%message (solve [2;1;3] 2020 : int)];;
-print_s [%message (solve [1;2;3] 2020 : int)];;
-print_s [%message (solve [2;3;1] 2020 : int)];;
-print_s [%message (solve [3;2;1] 2020 : int)];;
-print_s [%message (solve [3;1;2] 2020 : int)];;
-print_s [%message (solve input 2020 : int)];;
-
-print_s [%message (solve input 30000000 : int)];;
+let%expect_test _ = 
+  print_s [%message (solve [0;3;6] 2020 : int)];
+  print_s [%message (solve [1;3;2] 2020 : int)];
+  print_s [%message (solve [2;1;3] 2020 : int)];
+  print_s [%message (solve [1;2;3] 2020 : int)];
+  print_s [%message (solve [2;3;1] 2020 : int)];
+  print_s [%message (solve [3;2;1] 2020 : int)];
+  print_s [%message (solve [3;1;2] 2020 : int)];
+  print_s [%message (solve input 2020 : int)];
+  print_s [%message (solve input 30000000 : int)];
+  [%expect {|
+    ("solve [0; 3; 6] 2020" 436)
+    ("solve [1; 3; 2] 2020" 1)
+    ("solve [2; 1; 3] 2020" 10)
+    ("solve [1; 2; 3] 2020" 27)
+    ("solve [2; 3; 1] 2020" 78)
+    ("solve [3; 2; 1] 2020" 438)
+    ("solve [3; 1; 2] 2020" 1836)
+    ("solve input 2020" 403)
+    ("solve input 30000000" 6823) |}]
+;;

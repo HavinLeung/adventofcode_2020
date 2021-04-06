@@ -1,5 +1,3 @@
-#! /usr/bin/env utop -require core,re,ppx_jane
-(* TIL that shebangs work in .ml files *)
 open Core
 open Re
 
@@ -106,10 +104,14 @@ let part2 (data : [`Mask of string | `Memset of (string * string)] list) =
   Hashtbl.fold mem ~init:0 ~f:(fun ~key:_ ~data accum -> accum + data)
 ;;
 
-print_s [%message (part1 ex1 : int)];
-
-print_s [%message (part1 input : int)];
-
-print_s [%message (part2 ex2 : int)];
-
-print_s [%message (part2 input : int)];
+let%expect_test _ = 
+  print_s [%message (part1 ex1 : int)];
+  print_s [%message (part1 input : int)];
+  print_s [%message (part2 ex2 : int)];
+  print_s [%message (part2 input : int)];
+  [%expect {|
+    ("part1 ex1" 165)
+    ("part1 input" 11327140210986)
+    ("part2 ex2" 208)
+    ("part2 input" 2308180581795) |}]
+;;

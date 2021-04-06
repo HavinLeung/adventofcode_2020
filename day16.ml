@@ -1,4 +1,3 @@
-#! /usr/bin/env utop -require core,re,ppx_jane
 open! Core
 open! Re
 
@@ -55,9 +54,6 @@ nearby tickets:
 38,6,12|} |> String.split_lines |> parse_strings
 ;;
 
-(* Man, that parsing is hard lol*)
-print_s [%message (example_input : t)];;
-
 let matches_rule (_,l1,u1,l2,u2) num =
   (l1 <= num && num <= u1) || (l2 <= num && num <= u2)
 ;;
@@ -77,9 +73,6 @@ let part1 (input:t) =
           ) + accum
       )
 ;;
-
-print_s [%message (part1 example_input : int)];;
-print_s [%message (part1 input : int)];;
 
 let rules_that_work rules num =
   List.filter rules ~f:(fun rule -> matches_rule rule num)
@@ -111,4 +104,13 @@ let part2 ((rules, your_ticket, nearby_tickets):t) =
       | "depa" -> accum * (List.nth_exn your_ticket i)
       | _ -> accum)
 ;;
-print_s [%message (part2 input : int)];;
+
+let%expect_test _ = 
+  print_s [%message (part1 example_input : int)];
+  print_s [%message (part1 input : int)];
+  print_s [%message (part2 input : int)];
+  [%expect {|
+    ("part1 example_input" 71)
+    ("part1 input" 25059)
+    ("part2 input" 3253972369789) |}]
+;;

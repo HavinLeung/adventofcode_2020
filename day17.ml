@@ -1,4 +1,3 @@
-#! /usr/bin/env utop -require core,re,ppx_jane
 open! Core
 open! Re
 
@@ -80,8 +79,13 @@ let neighbors1 (coord : Coordinate3D.t) : Coordinate3D.t list =
     )
 ;;
 
-print_s [%message (Set.length (cycles example_input 6 neighbors1 Coordinate3D.Set.empty) : int)];;
-print_s [%message (Set.length (cycles input 6 neighbors1 Coordinate3D.Set.empty) : int)];;
+let%expect_test _ =
+  print_s [%message (Set.length (cycles example_input 6 neighbors1 Coordinate3D.Set.empty) : int)];
+  print_s [%message (Set.length (cycles input 6 neighbors1 Coordinate3D.Set.empty) : int)];
+  [%expect {|
+    ("Set.length (cycles example_input 6 neighbors1 Coordinate3D.Set.empty)" 112)
+    ("Set.length (cycles input 6 neighbors1 Coordinate3D.Set.empty)" 301) |}]
+;;
 
 module Coordinate4D = struct
   module T = struct
@@ -137,5 +141,10 @@ let neighbors2 (coord : Coordinate4D.t) : Coordinate4D.t list =
     )
 ;;
 
-print_s [%message (Set.length (cycles example_input 6 neighbors2 Coordinate4D.Set.empty) : int)];;
-print_s [%message (Set.length (cycles input 6 neighbors2 Coordinate4D.Set.empty) : int)];;
+let%expect_test  _ =
+  print_s [%message (Set.length (cycles example_input 6 neighbors2 Coordinate4D.Set.empty) : int)];
+  print_s [%message (Set.length (cycles input 6 neighbors2 Coordinate4D.Set.empty) : int)];
+  [%expect {|
+    ("Set.length (cycles example_input 6 neighbors2 Coordinate4D.Set.empty)" 848)
+    ("Set.length (cycles input 6 neighbors2 Coordinate4D.Set.empty)" 2424) |}]
+;;
